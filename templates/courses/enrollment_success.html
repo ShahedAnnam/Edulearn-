@@ -1,0 +1,33 @@
+{% extends "courses/base.html" %}
+
+{% block title %}
+    Enrollment Successful
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %} text-center">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+        {% else %}
+
+        <div class="alert alert-success text-center">
+            <h2>Enrollment Successful!</h2>
+            <p>
+                {% if student.name %}
+                    {{ student.name }}
+                {% else %}
+                    {{ student.email }}
+                {% endif %}
+                has been enrolled in <strong>{{ course.title }}</strong>.
+            </p>
+            <p><strong>{{ enrolled_count }}</strong> students are currently enrolled in this course.</p>
+            <a href="/courses/" class="btn btn-primary">Back to Courses</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
