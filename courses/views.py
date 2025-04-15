@@ -49,17 +49,24 @@ class EnrollStudentAPI(APIView):
 
 
 # Course List
+
+
+login_required(login_url='login')
 def course_list(request):
     courses = Course.objects.all()
     return render(request, 'courses/course_list.html', {'courses': courses})
 
 # Course Detail
+login_required(login_url='login')
+
 def course_detail(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     lessons = course.lessons.all()
     return render(request, 'courses/course_detail.html', {'course': course, 'lessons': lessons})
 
 # Create Course
+login_required(login_url='login')
+
 def course_create(request):
     if request.method == "POST":
         form = CourseForm(request.POST, request.FILES)
@@ -72,6 +79,8 @@ def course_create(request):
     return render(request, 'courses/course_form.html', {'form': form})
 
 # Update Course
+login_required(login_url='login')
+
 def course_update(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     if request.method == "POST":
@@ -85,6 +94,8 @@ def course_update(request, course_id):
     return render(request, 'courses/course_form.html', {'form': form})
 
 # Delete Course
+login_required(login_url='login')
+
 def course_delete(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     if request.method == "POST":
@@ -94,6 +105,8 @@ def course_delete(request, course_id):
     return render(request, 'courses/course_confirm_delete.html', {'course': course})
 
 # Create Lesson
+login_required(login_url='login')
+
 def lesson_create(request):
     if request.method == "POST":
         form = LessonForm(request.POST)
@@ -106,6 +119,8 @@ def lesson_create(request):
     return render(request, 'courses/lesson_form.html', {'form': form})
 
 # Update Lesson
+login_required(login_url='login')
+
 def lesson_update(request, lesson_id):
     lesson = get_object_or_404(Lesson, id=lesson_id)
     if request.method == "POST":
@@ -119,6 +134,8 @@ def lesson_update(request, lesson_id):
     return render(request, 'courses/lesson_form.html', {'form': form})
 
 # Delete Lesson
+login_required(login_url='login')
+
 def lesson_delete(request, lesson_id):
     lesson = get_object_or_404(Lesson, id=lesson_id)
     if request.method == "POST":
@@ -129,6 +146,7 @@ def lesson_delete(request, lesson_id):
 
 
 
+login_required(login_url='login')
 
 def enroll_student(request):
     if request.method == 'POST':
@@ -159,6 +177,7 @@ def enroll_student(request):
 
 
 
+login_required(login_url='login')
 
 def enrolled_students(request, course_id):
     # Get the course based on the passed ID
@@ -198,6 +217,7 @@ def user_login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'courses/login.html', {'form': form})
+login_required(login_url='login')
 
 def user_logout(request):
     logout(request)
