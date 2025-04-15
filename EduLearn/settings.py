@@ -36,7 +36,9 @@ SECRET_KEY =env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["edulearn-production-3ad3.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ['https://edulearn-production-3ad3.up.railway.app']
+
 
 
 # Application definition
